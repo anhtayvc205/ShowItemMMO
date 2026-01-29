@@ -23,10 +23,8 @@ public class ShowItemCommand implements CommandExecutor {
         }
 
         Component msg = Component.text("§e" + p.getName() + " §fđã show item: ")
-                .append(
-                        Component.text("§b[ITEM]")
-                                .hoverEvent(HoverEvent.showText(HoverMMO.create(item)))
-                );
+                .append(Component.text("§b[ITEM]")
+                        .hoverEvent(HoverEvent.showText(HoverMMO.create(item))));
 
         p.getServer().broadcast(msg);
         return true;
