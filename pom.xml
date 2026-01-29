@@ -8,14 +8,10 @@
     <groupId>me.n</groupId>
     <artifactId>ShowItemMMO</artifactId>
     <version>1.0</version>
-    <packaging>jar</packaging>
-
-    <name>ShowItemMMO</name>
 
     <properties>
         <java.version>21</java.version>
         <paper.version>1.21.1-R0.1-SNAPSHOT</paper.version>
-        <mmoitems.version>6.10.1</mmoitems.version>
     </properties>
 
     <repositories>
@@ -26,36 +22,11 @@
     </repositories>
 
     <dependencies>
-        <!-- Paper API -->
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
             <version>${paper.version}</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- MMOItems (LOCAL JAR - FIX LỖI) -->
-        <dependency>
-            <groupId>net.Indyuce</groupId>
-            <artifactId>MMOItems</artifactId>
-            <version>${mmoitems.version}</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/libs/MMOItems.jar</systemPath>
-        </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
-                <configuration>
-                    <source>21</source>
-                    <target>21</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>
