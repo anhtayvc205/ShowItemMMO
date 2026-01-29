@@ -31,12 +31,9 @@ public class ChatListener implements Listener {
         Component finalMsg = Component.text("<" + p.getName() + "> ");
 
         String[] parts = msg.split("\\[i\\]|\\[item\\]", -1);
-
         for (int i = 0; i < parts.length; i++) {
             finalMsg = finalMsg.append(Component.text(parts[i]));
-            if (i < parts.length - 1) {
-                finalMsg = finalMsg.append(itemComp);
-            }
+            if (i < parts.length - 1) finalMsg = finalMsg.append(itemComp);
         }
 
         p.getServer().broadcast(finalMsg);
