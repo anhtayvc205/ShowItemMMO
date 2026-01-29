@@ -2,8 +2,8 @@ name: ShowItemMMO
 version: 1.0
 main: me.n.showitemmmo.ShowItemMMOPlugin
 api-version: 1.21
-depend: [MMOItems]
+softdepend: [MMOItems]
 
 commands:
   showitem:
-    description: Show item với hover MMO
+    description: Show item MMO style
