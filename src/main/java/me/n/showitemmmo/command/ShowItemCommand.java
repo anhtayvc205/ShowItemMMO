@@ -3,6 +3,7 @@ package me.n.showitemmmo.command;
 import me.n.showitemmmo.util.HoverMMO;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,13 +19,19 @@ public class ShowItemCommand implements CommandExecutor {
 
         ItemStack item = p.getInventory().getItemInMainHand();
         if (item.getType().isAir()) {
-            p.sendMessage(Component.text("§cBạn không cầm item nào!"));
+            p.sendMessage(Component.text("Bạn không cầm item nào!", NamedTextColor.RED));
             return true;
         }
 
-        Component msg = Component.text("§e" + p.getName() + " §fđã show item: ")
-                .append(Component.text("§b[ITEM]")
-                        .hoverEvent(HoverEvent.showText(HoverMMO.create(item))));
+        String name = item.hasItemMeta() && item.getItemMeta().hasDisplayName()
+                ? item.getItemMeta().getDisplayName()
+                : item.getType().name().replace("_", " ");
+
+        Component itemComponent = Component.text(name, NamedTextColor.AQUA)
+                .hoverEvent(HoverEvent.showText(HoverMMO.create(item)));
+
+        Component msg = Component.text(p.getName() + " đã show item: ", NamedTextColor.YELLOW)
+                .append(itemComponent);
 
         p.getServer().broadcast(msg);
         return true;
