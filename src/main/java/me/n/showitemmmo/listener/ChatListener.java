@@ -4,6 +4,7 @@ import io.papermc.paper.event.player.AsyncChatEvent;
 import me.n.showitemmmo.util.HoverMMO;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,15 +26,21 @@ public class ChatListener implements Listener {
 
         e.setCancelled(true);
 
-        Component itemComp = Component.text("§b[ITEM]")
+        String name = item.hasItemMeta() && item.getItemMeta().hasDisplayName()
+                ? item.getItemMeta().getDisplayName()
+                : item.getType().name().replace("_", " ");
+
+        Component itemComp = Component.text(name, NamedTextColor.AQUA)
                 .hoverEvent(HoverEvent.showText(HoverMMO.create(item)));
 
-        Component finalMsg = Component.text("<" + p.getName() + "> ");
+        Component finalMsg = Component.text("<" + p.getName() + "> ", NamedTextColor.GRAY);
 
         String[] parts = msg.split("\\[i\\]|\\[item\\]", -1);
         for (int i = 0; i < parts.length; i++) {
-            finalMsg = finalMsg.append(Component.text(parts[i]));
-            if (i < parts.length - 1) finalMsg = finalMsg.append(itemComp);
+            finalMsg = finalMsg.append(Component.text(parts[i], NamedTextColor.WHITE));
+            if (i < parts.length - 1) {
+                finalMsg = finalMsg.append(itemComp);
+            }
         }
 
         p.getServer().broadcast(finalMsg);
